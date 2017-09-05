@@ -1,9 +1,9 @@
 Basic Login System
 
 A Basic Login System built on only HTML and php with features like
-Forgot password
-Change password
-Verification of account via email Address
+#Forgot password
+#Change password
+#Verification of account via email Address
 
 This uses PHPMailer-master repo to send mails.
 
