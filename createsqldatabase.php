@@ -25,11 +25,13 @@ CREATE TABLE `login` (
  `username` varchar(100) NOT NULL,
  `name` varchar(100) NOT NULL,
  `email` varchar(100) NOT NULL,
- `password` varchar(100) NOT NULL,
+ `password` varchar(256) NOT NULL,
  `verified` tinyint(1) NOT NULL DEFAULT '0',
  `hash` varchar(50) NOT NULL,
- PRIMARY KEY (`username`)
-) ;'))
+ `image` varchar(100) NOT NULL,
+ PRIMARY KEY (`username`),
+ UNIQUE KEY `email` (`email`)
+)'))
 {
   echo "Success!";
 }
