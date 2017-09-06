@@ -1,11 +1,5 @@
 <?php
 
-// $host = 'shareddb1c.hosting.stackcp.net';
-// $user = 'sampleuser';
-// $password = 'wrongpassword123';
-// $database = 'testdb-32300ab8';
-
-
 	$host = 'localhost';
 	$user = 'root';
 	$password = 'incorrect';
