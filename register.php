@@ -38,6 +38,7 @@ if ( mysqli_num_rows($result) > 0 ) {
   $message = "User with this email already exists!";
   echo "<script>alert('$message');</script>";
   header('Refresh:0;url=./index.php');
+  die();
 }
 
 
@@ -73,10 +74,6 @@ else {
     // Add user to the database
     if ( mysqli_query($con,$sql) ){
 
-        echo "Confirmation link has been sent to $email, please verify
-        your account by clicking on the link in the message!";
-
-
         // Send registration confirmation link (verify.php)
         $to      = $email;
         $subject = 'Account Verification ( Veronica )';
@@ -90,6 +87,10 @@ else {
         http://localhost/projects/finallogin/verify.php?email='.$email.'&hash='.$hash;
 
         email_std( $to, $subject, $message_body );
+
+        $message = "Confirmation link has been sent to $email, please verify your account by clicking on the link in the message!";
+        echo "<script>alert('$message');</script>";
+        header('Refresh:0;url=./index.php');
 
     }
 

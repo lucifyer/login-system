@@ -4,29 +4,28 @@
 <head>
   <meta charset="utf-8">
   <title>Login Page</title>
+
+  <script>
+
+  //To check wether both the passwords are same
+      function validate()
+      {
+          if(document.getElementById('password').value==document.getElementById('password2').value)
+            return true;
+          else {
+              alert('Passwords do not match!');
+              return false;
+          }
+      }
+  </script>
+
 </head>
 
-<?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST')
-{
-    if (isset($_POST['login'])) { //user logging in
-
-        require './login.php';
-
-    }
-
-    elseif (isset($_POST['register'])) { //user registering
-
-        require './register.php';
-
-    }
-}
-?>
 
 <body>
   <h1>Welcome!</h1>
 
-  <form action="index.php" method="post">
+  <form action="login.php" method="post">
     <label>Username</label>
     <input type="text" required name="username" />
 
@@ -40,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
   <h1>Sign Up for Free</h1>
 
-  <form action="index.php" method="post" enctype="multipart/form-data">
+  <form action="register.php" onsubmit="return validate()" method="post" enctype="multipart/form-data">
 
     <label for="name">Name</label>
     <input type="text" required name='name' /><br>
@@ -52,7 +51,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     <input type="email" required name='email' /><br>
 
     <label for="password">Password</label>
-    <input type="password" required name='password' /><br>
+    <input type="password" required name='password' id="password" /><br>
+
+    <label for="password2">Re-enter Password</label>
+    <input type="password" required name='password2' id="password2" /><br>
 
     <label for="image">Display Picture</label>
     <input type="file" name="image"><br>
