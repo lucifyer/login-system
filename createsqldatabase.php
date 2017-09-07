@@ -27,7 +27,7 @@ CREATE TABLE `login` (
  `email` varchar(100) NOT NULL,
  `password` varchar(256) NOT NULL,
  `verified` tinyint(1) NOT NULL DEFAULT '0',
- `hash` varchar(50) NOT NULL,
+ `hash` varchar(100) NOT NULL,
  `image` varchar(100) NOT NULL,
  PRIMARY KEY (`username`),
  UNIQUE KEY `email` (`email`)
