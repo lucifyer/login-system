@@ -4,7 +4,6 @@ session_start();
 
 require_once './db.php';
 
-
 function unique_salt() {
     return substr(sha1(mt_rand()),0,22);
 }
@@ -16,9 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Make sure the two passwords match
     if ( $_POST['newpassword'] == $_POST['confirmpassword'] ) {
 
-
-        $new_password= crypt($_POST['newpassword'], '$2a$10$'.unique_salt());
-        $new_hash=unique_salt();
+        $new_password= password_hash($_POST['newpassword'], PASSWORD_BCRYPT);
+        $new_hash=password_hash(unique_salt(), PASSWORD_BCRYPT);
 
         // We get $_POST['email'] and $_POST['hash'] from the session variables
         $email = mysqli_real_escape_string($con,$_SESSION['email']);

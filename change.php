@@ -17,13 +17,13 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' )
 
       $user = mysqli_fetch_assoc($result); // $user becomes array with user data
 
-      if(crypt($_POST['password'],$user['password']) == $user['password'])
+      if(password_verify($_POST['password'],$user['password']))
       {
         $address='http://localhost/projects/finallogin/reset.php?email='.$user['email'].'&hash='.$user['hash'];
         header("location: $address");
     }
     else {
-      echo "incorrect password! Try again!";
+      echo "Incorrect password! Try again!";
     }
   }
   else {
