@@ -4,12 +4,10 @@
  */
 
 include './sendmailbasic.php';
-
 //Random salt generator
  function unique_salt() {
      return substr(sha1(mt_rand()),0,22);
  }
-
 
  session_start();
 
@@ -22,8 +20,9 @@ $name = mysqli_real_escape_string($con,$_POST['name']);
 $username = mysqli_real_escape_string($con,$_POST['username']);
 $email = mysqli_real_escape_string($con,$_POST['email']);
 $password = mysqli_real_escape_string($con,$_POST['password']);
-$password= crypt($password, '$2a$10$'.unique_salt());
-$hash=unique_salt();
+$password= password_hash($password, PASSWORD_BCRYPT);
+$hash=password_hash(unique_salt(), PASSWORD_BCRYPT);
+
 
 //This is the directory where images will be saved
 $target = "images/";

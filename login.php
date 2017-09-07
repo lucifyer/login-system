@@ -17,7 +17,7 @@ if ( mysqli_num_rows($result) == 0 ){ // User doesn't exist
 else { // User exists
     $user = mysqli_fetch_assoc($result);
 
-    if ( crypt($_POST['password'],$user['password']) == $user['password'])
+    if ( password_verify($_POST['password'],$user['password']))
      {
         $_SESSION['username'] = $user['username'];
         $_SESSION['image'] = $user['image'];
