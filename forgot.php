@@ -1,9 +1,9 @@
 <?php
 /* Reset your password form, sends reset.php password link */
 
-include './sendmailbasic.php';
+include 'include/sendmailbasic.php';
 
-require_once './db.php';
+require_once 'include/db.php';
 
 
 // Check if form submitted with method="post"

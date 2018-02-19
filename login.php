@@ -17,14 +17,13 @@ if ( mysqli_num_rows($result) == 0 ){ // User doesn't exist
 else { // User exists
     $user = mysqli_fetch_assoc($result);
 
-    if ( password_verify($_POST['password'],$user['password']))
+    if (password_verify($_POST['password'],$user['password']))
      {
         $_SESSION['username'] = $user['username'];
         $_SESSION['image'] = $user['image'];
         // This is how we'll know the user is logged in
 
         $_SESSION['logged_in'] = true;
-
         header("location: profile.php");
     }
     else {
