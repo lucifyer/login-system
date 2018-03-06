@@ -3,9 +3,7 @@
    is included in the register.php email message
 */
 session_start();
-require_once './db.php';
-
-
+require_once 'include/db.php';
 
 // Make sure email and hash variables aren't empty
 if(isset($_GET['email']) && !empty($_GET['email']))

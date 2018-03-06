@@ -4,31 +4,30 @@
 // Escape email to protect against SQL injections
 session_start();
 
-require_once 'db.php';
+require_once 'include/db.php';
 
-$username = mysqli_real_escape_string($con,$_POST['username']);
-$result = mysqli_query($con,"SELECT * FROM login WHERE username='$username'");
+$stmt = $con->prepare("SELECT * FROM `login` WHERE `username` = ?");
+$stmt->bind_param("s", $username);
+$username = $_POST['username'];
+$stmt->execute();
+$result = $stmt->get_result();
 
-if ( mysqli_num_rows($result) == 0 ){ // User doesn't exist
-  $message = "No such username registered!";
-  echo "<script>alert('$message');</script>";
-  header('Refresh:0;url=index.php');
-}
-else { // User exists
-    $user = mysqli_fetch_assoc($result);
+if ($result->num_rows == 0) { // User doesn't exist
+    $_SESSION['message'] = "No such username registered!";
+    header('Location: index.php');
+} else { // User exists
 
-    if (password_verify($_POST['password'],$user['password']))
-     {
-        $_SESSION['username'] = $user['username'];
-        $_SESSION['image'] = $user['image'];
+    $row = $result->fetch_assoc();
+
+    if (password_verify($_POST['password'], $row['password'])) {
+        $_SESSION['username'] = $row['username'];
+        $_SESSION['image'] = $row['image'];
         // This is how we'll know the user is logged in
 
         $_SESSION['logged_in'] = true;
         header("location: profile.php");
-    }
-    else {
-      $message = "Wrong password";
-      echo "<script>alert('$message');</script>";
-      header('Refresh:0;url=index.php');
+    } else {
+        $_SESSION['message'] = "Wrong password";
+        header('Location: index.php');
     }
 }

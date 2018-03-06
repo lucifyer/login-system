@@ -6,62 +6,78 @@
   <title>Login Page</title>
 
   <script>
-
-  //To check wether both the passwords are same
-      function validate()
-      {
-          if(document.getElementById('password').value==document.getElementById('password2').value)
-            return true;
-          else {
-              alert('Passwords do not match!');
-              return false;
-          }
+    //To check wether both the passwords are same
+    function validate() {
+      if (document.getElementById('password').value == document.getElementById('password2').value)
+        return true;
+      else {
+        alert('Passwords do not match!');
+        return false;
       }
+    } 
   </script>
 
 </head>
 
 
 <body>
-  <h1>Welcome!</h1>
 
-  <form action="login.php" method="post">
-    <label>Username</label>
-    <input type="text" required name="username" />
+  <?php
+session_start();
 
-    <label>Password</label>
-    <input type="password" required name="password" />
-    <p><a href="forgot.php">Forgot Password?</a></p>
+if (isset($_SESSION['message']) and !empty($_SESSION['message'])) {
+    echo $_SESSION['message'];
+    unset($_SESSION['message']);}
 
-    <button type="submit" name="login"/>Log In</button>
+?>
 
-  </form>
+    <h1>Welcome!</h1>
 
-  <h1>Sign Up for Free</h1>
+    <form action="login.php" method="post">
+      <label>Username</label>
+      <input type="text" required name="username" />
 
-  <form action="register.php" onsubmit="return validate()" method="post" enctype="multipart/form-data">
+      <label>Password</label>
+      <input type="password" required name="password" />
+      <p>
+        <a href="forgot.php">Forgot Password?</a>
+      </p>
 
-    <label for="name">Name</label>
-    <input type="text" required name='name' /><br>
+      <button type="submit" name="login" />Log In</button>
 
-    <label for="username">Username</label>
-    <input type="text" required name='username' /><br>
+    </form>
 
-    <label for="email">Email Address</label>
-    <input type="email" required name='email' /><br>
+    <h1>Sign Up for Free</h1>
 
-    <label for="password">Password</label>
-    <input type="password" required name='password' id="password" /><br>
+    <form action="register.php" onsubmit="return validate()" method="post" enctype="multipart/form-data">
 
-    <label for="password2">Re-enter Password</label>
-    <input type="password" required name='password2' id="password2" /><br>
+      <label for="name">Name</label>
+      <input type="text" required name='name' />
+      <br>
 
-    <label for="image">Display Picture</label>
-    <input type="file" name="image"><br>
+      <label for="username">Username</label>
+      <input type="text" required name='username' />
+      <br>
 
-    <button type="submit" name="register" />Register</button>
+      <label for="email">Email Address</label>
+      <input type="email" required name='email' />
+      <br>
 
-  </form>
+      <label for="password">Password</label>
+      <input type="password" required name='password' id="password" />
+      <br>
+
+      <label for="password2">Re-enter Password</label>
+      <input type="password" required name='password2' id="password2" />
+      <br>
+
+      <label for="image">Display Picture</label>
+      <input type="file" name="image">
+      <br>
+
+      <button type="submit" name="register" />Register</button>
+
+    </form>
 
 </body>
 

@@ -1,3 +1,0 @@
-TODO list
-
-//Check if the forgot password method can be implemented in a better way

@@ -1,10 +1,9 @@
 <?php
 /* Reset your password form, sends reset.php password link */
-
-include './sendmailbasic.php';
-
 session_start();
-require_once './db.php';
+
+include 'include/sendmailbasic.php';
+require_once 'include/db.php';
 
 
 // Check if form submitted with method="post"
@@ -28,7 +27,7 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' )
   }
   else {
     $_SESSION['message'] = "Forbidden";
-    header("location: ./error.php");
+    header("location: ./index.php");
   }
 
 

@@ -4,30 +4,32 @@
 include 'include/sendmailbasic.php';
 
 require_once 'include/db.php';
-
+session_start();
 
 // Check if form submitted with method="post"
 if ( $_SERVER['REQUEST_METHOD'] == 'POST' )
 {
-    $email = mysqli_real_escape_string($con,$_POST['email']);
+    
     $result = mysqli_query($con,"SELECT * FROM login WHERE email='$email'");
-
-    if (  mysqli_num_rows($result) == 0 ) // User doesn't exist
+    $stmt=$con->prepare("SELECT * FROM `login` WHERE `email` = ?");
+    $stmt->bind_param("s",$email);
+    $email = $_POST['email'];
+    $stmt->execute();
+    $result= $stmt->get_result();
+    if (  $result->num_rows == 0 ) // User doesn't exist
     {
-        $message = "User with that email doesn't exist!";
-        echo "<script>alert('$message');</script>";
-        header('Refresh:0;url=./forgot.php');
+        $_SESSION['message'] = "User with that email doesn't exist!";
+        header('Location: ./forgot.php');
     }
     else { // User exists (num_rows != 0)
 
-        $user = mysqli_fetch_assoc($result); // $user becomes array with user data
+        $user = $result->fetch_assoc(); // $user becomes array with user data
 
         $email = $user['email'];
         $username = $user['username'];
         $hash=$user['hash'];
 
-
-        // Send registration confirmation link (reset.php)
+        // Send Password Link confirmation link (reset.php)
 
         $to      = $email;
         $subject = 'Password Reset Link ( Veronica )';
@@ -42,9 +44,8 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' )
 
         if(email_std($to, $subject, $message_body))
         {
-            $message = "Password reset link has been sent to email address!";
-            echo "<script>alert('$message');</script>";
-            header('Refresh:0;url=./index.php');
+            $_SESSION['message'] = "Password reset link has been sent to email address!";
+            header('Location: ./index.php');
         }
 
     }
