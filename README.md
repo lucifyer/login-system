@@ -1,10 +1,16 @@
-Basic Login System
+# A Complete Login System COTS
 
-A Basic Login System built on only HTML and php with features like
-#Forgot password
-#Change password
-#Verification of account via email Address
+### The Features Included
 
-This uses PHPMailer-master repo to send mails.
+- Log in
+- Register an account
+- Forgot Password
+- Change Password
+- Change Display Picture
+- Verification of email account
+
+The file *login.sql* contains the MySQL table exported in the .sql format.
+
+This uses **[PHPMailer-master]**(https://github.com/PHPMailer/PHPMailer) repo to send emails.
 
 This is a login system striped to the bare minimum so that you can either understand it from the basic or use it in your project with your style and validations.

@@ -3,7 +3,7 @@
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
         require_once 'include/db.php';
-
+        session_start();
         //This is the directory where images will be saved
         $target = "images/";
         $target = $target . $_SESSION['username'] . '.jpg';
@@ -28,7 +28,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
 
         }
-
-    
 
 }

@@ -37,9 +37,8 @@ if (isset($_SESSION['logged_in'])) {
     </html>
     <?php
 } else {
-    $message = "Please login to view this page!";
-    echo "<script>alert('$message');</script>";
-    header('Refresh:0;url=./index.php');
+    $_SESSION['message'] = "Please login to view this page!";
+    header('Location: ./index.php');
 }
 
 ?>

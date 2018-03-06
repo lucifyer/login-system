@@ -47,7 +47,7 @@ if (mysqli_num_rows($result) > 0) {
     // username doesn't already exist in a database, proceed...
 
     //This is the directory where images will be saved
-    $target = "images/";
+    $target = "./images/";
     $target = $target . $username . '.jpg';
 
     if (!empty($_FILES['image']['tmp_name'])) {
