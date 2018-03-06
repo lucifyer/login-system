@@ -33,12 +33,12 @@
 			$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
 			$mail->Port = 587;                                    // TCP port to connect to
 
-			$mail->Username = 'nownobodynow@yandex.com';                 // SMTP username
-			$mail->Password = 'incorrect';                           // SMTP password
-			$mail->From = 'nownobodynow@yandex.com';
+			$mail->Username = '';                 // SMTP username
+			$mail->Password = '';                           // SMTP password
+			$mail->From = '';
 			$mail->FromName = $From_name;
 
-			$mail->addReplyTo('nownobodynow@yandex.com', 'No-reply');
+			$mail->addReplyTo('', 'No-reply');
 			$mail->addAddress($mail_to,"User 1");
 			$mail->Subject = $mail_sub;
 			$mail->AltBody = 'To view the message, please use an HTML compatible email viewer!'; // optional - MsgHTML will create an alternate automatically
